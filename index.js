@@ -6,6 +6,14 @@ const path = require("path");
 const secretsPath = path.join(__dirname, "secrets.json");
 const secrets = JSON.parse(fs.readFileSync(secretsPath));
 
+function createFolders(dirs) {
+    dirs.forEach((dir) => {
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+    });
+}
+
 // Select the first bot from the secrets
 const selfbotName = Object.keys(secrets)[0];
 const tokenVar = secrets[selfbotName];
